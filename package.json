@@ -1,0 +1,17 @@
+{
+  "name": "crud-express",
+  "version": "1.0.0",
+  "description": "crud express",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "nodemon",
+    "morgan"
+  ],
+  "author": "Willy",
+  "license": "MIT"
+}
