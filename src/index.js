@@ -10,6 +10,9 @@ const PORT = 4000;
 //creamos la app
 const app = express();
 
+//habilitar json(body)
+app.use(express.json());
+
 // habilitar rutas
 app.use("/api",rutas);
 

@@ -13,35 +13,67 @@ async function funListar(req, res) {
     // });
 }
 
-function funGuardar(req, res) {
+async function funGuardar(req, res) {
+    // console.log(req.body);
+    try {
+        const datos = req.body;
+        const nuevoProducto = await Producto.create(datos);
 
-
-    // return res.json({
-    //     "mensaje": "guardando producto"
-    // });
+        return res.status(201).json({
+            "mensaje": "producto guardado",
+            "producto": nuevoProducto,
+        });
+    } catch (error) {
+        console.log(error);
+    }
 }
 
-function funMostrar(req, res) {
+async function funMostrar(req, res) {
     const id = req.params.id; //aquí obtienes el id de la URL
 
+    const producto = await Producto.findByPk(id);
+
+    if(!producto){
+        return res.status(404).json({"mensaje":"Producto no encontrado"})
+    }
+
     return res.json({
-        "mensaje": `mostrando producto con id: ${id}`
+        "mensaje": `mostrando producto con id: ${id}`,
+        "producto": producto
     });
 }
 
-function funModificar(req, res) {
+async function funModificar(req, res) {
     const id = req.params.id; //aquí obtienes el id de la URL
 
+    const producto = await Producto.findByPk(id);
+
+    if(!producto){
+        return res.status(404).json({"mensaje":"Producto no encontrado"})
+    }
+
+    const newProducto = await producto.update(req.body);
+
     return res.json({
-        "mensaje": `modificando producto con id: ${id}`
+        "mensaje": `producto modificado con id: ${id}`,
+        "producto": newProducto
     });
 }
 
-function funEliminar(req, res) {
+async function funEliminar(req, res) {
     const id = req.params.id; //aquí obtienes el id de la URL
 
+    const producto = await Producto.findByPk(id);
+
+    if(!producto){
+        return res.status(404).json({"mensaje":"Producto no encontrado"})
+    }
+
+    await producto.destroy();
+
     return res.json({
-        "mensaje": `eliminando producto con id: ${id}`
+        "mensaje": `producto eliminando con id: ${id}`,
+        "producto": producto
     });
 }
 
