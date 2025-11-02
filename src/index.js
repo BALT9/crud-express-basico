@@ -1,22 +1,21 @@
-//importar express (modulos de terceros)
 const express = require("express");
-
-//importamos rutas
 const rutas = require("./routes/index");
+const setupSwagger = require("./swagger");
 
-//variables
 const PORT = 4000;
-
-//creamos la app
 const app = express();
 
-//habilitar json(body)
+// habilitar json(body)
 app.use(express.json());
 
 // habilitar rutas
-app.use("/api",rutas);
+app.use("/api", rutas);
 
-// levantar el servidor 
-app.listen(PORT, ()=>{
-    console.log("servidor levantado en el puerto http://localhost:4000/");
-})
+// habilitar documentación Swagger
+setupSwagger(app);
+
+// levantar el servidor
+app.listen(PORT, () => {
+    console.log(`Servidor levantado en http://localhost:${PORT}/`);
+    console.log(`Documentación en http://localhost:${PORT}/api-docs`);
+});
