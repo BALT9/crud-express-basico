@@ -1,14 +1,24 @@
-function funListar(req, res) {
-    // console.log("listadoooo...")
-    return res.json({
-        "mensaje": "listando producto"
-    });
+// importacion del modelo producto 
+const Producto = require("./../models/producto");
+
+async function funListar(req, res) {
+    try {
+        const productos = await Producto.findAll();
+        return res.json(productos);
+    } catch (error) {
+        console.log(error);
+    }
+    // return res.json({
+    //     "mensaje": "listando producto"
+    // });
 }
 
 function funGuardar(req, res) {
-    return res.json({
-        "mensaje": "guardando producto"
-    });
+
+
+    // return res.json({
+    //     "mensaje": "guardando producto"
+    // });
 }
 
 function funMostrar(req, res) {
